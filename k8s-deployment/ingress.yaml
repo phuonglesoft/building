@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:building-management-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /residents
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+spec:
+  - host: api.building.com
+  rules:
+  - http:
+      paths:
+      - path: /residents
+        pathType: Prefix
+        backend:
+          service:
+            name: building-management-service
+            port:
+              number: 80
+      - path: /buildings
+        pathType: Prefix
+        backend:
+          service:
+            name: building-management-service
+            port:
+              number: 80

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: building-management-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: building-management
+  template:
+    metadata:
+      labels:
+        app: building-management
+    spec:
+      containers:
+      - name: building-management
+        image: <aws-account-id>.dkr.ecr.us-east-1.amazonaws.com/my-building-management:<TAG>
+        ports:
+        - containerPort: 3000

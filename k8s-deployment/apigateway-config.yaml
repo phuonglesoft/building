@@ -1,0 +1,44 @@
+apiVersion: apigatewayv2.services.k8s.aws/v1alpha1
+kind: API
+metadata:
+  name: building-management-api
+spec:
+  name: EksServiceApi
+  protocolType: HTTP
+---
+apiVersion: apigatewayv2.services.k8s.aws/v1alpha1
+kind: Integration
+metadata:
+  name: resident-integration
+spec:
+  apiRef:
+    from:
+      name:building-management-api
+  integrationType: HTTP_PROXY
+  integrationURI: http://<alb-dns>/residents # DNS of ALB
+  integrationMethod: GET
+  payloadFormatVersion: "1.0"
+---
+apiVersion: apigatewayv2.services.k8s.aws/v1alpha1
+kind: Route
+metadata:
+  name: resident-route
+spec:
+  apiRef:
+    from:
+      name: building-management-api
+  routeKey: "GET /residents"
+  targetRef:
+    from:
+      name: resident-integration
+---
+apiVersion: apigatewayv2.services.k8s.aws/v1alpha1
+kind: Stage
+metadata:
+  name: default-stage
+spec:
+  apiRef:
+    from:
+      name: building-management-api
+  stageName: "$default"
+  autoDeploy: true

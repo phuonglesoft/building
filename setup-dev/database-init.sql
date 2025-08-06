@@ -1,0 +1,1 @@
+CREATE DATABASE building_management;
