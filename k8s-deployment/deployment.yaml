@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: building-management
-        image: <aws-account-id>.dkr.ecr.us-east-1.amazonaws.com/my-building-management:<TAG>
+        image: 7425-0896-7465.dkr.ecr.us-east-1.amazonaws.com/my-building-management:<TAG>
         ports:
         - containerPort: 3000

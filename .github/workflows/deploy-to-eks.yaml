@@ -33,10 +33,10 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t my-building-management:latest .
-          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin <aws-account-id>.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin 7425-0896-7465.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
           aws ecr create-repository --repository-name my-building-management --region ${{ env.AWS_REGION }} || true
-          docker tag my-building-management:latest <aws-account-id>.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/my-building-management:latest
-          docker push <aws-account-id>.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/my-building-management:latest
+          docker tag my-building-management:latest 7425-0896-7465.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/my-building-management:latest
+          docker push 7425-0896-7465.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/my-building-management:latest
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
