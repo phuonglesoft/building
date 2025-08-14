@@ -21,5 +21,4 @@ export const addUserToGroup = async (username: string, groupName: string) => {
   }
 };
 
-// Ví dụ sử dụng
 addUserToGroup('user@example.com', 'admin');
